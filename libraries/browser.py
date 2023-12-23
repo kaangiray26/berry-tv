@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 class Browser:
     def __init__(self):
@@ -8,6 +9,9 @@ class Browser:
         self.options = webdriver.FirefoxOptions()
         self.options.set_preference("media.autoplay.default", 0)
         
+        # Set fullscreen approval
+        self.options.set_preference("full-screen-api.approval-required", False)
+        
         # Create Firefox webdriver
         self.driver = webdriver.Firefox(options=self.options)
         
@@ -16,8 +20,7 @@ class Browser:
         
         # Install uBlock Origin
         self.driver.install_addon("libraries/uBlock0_1.54.0.firefox.signed.xpi")
-        
-        self.driver.get("about:blank")
+        self.driver.execute_script("window.location.href = 'http://localhost:8000/connect'")
     
     def get_title(self):
         return {
@@ -56,3 +59,6 @@ class Browser:
     
     def seek_forward(self):
         self.driver.execute_script("document.querySelector('video').currentTime += 10")
+        
+    def fullscreen(self):
+        self.driver.find_element(By.TAG_NAME, "body").send_keys("f")

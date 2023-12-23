@@ -6,7 +6,7 @@ fi
 
 if [ $1 == "start" ]; then
     echo "Starting server..."
-    env/bin/python -m gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 --bind 127.0.0.1:8000 app:app
+    env/bin/python -m gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 --bind 0.0.0.0:8000 app:app
 elif [ $1 == "install" ]; then
     env/bin/python -m pip install -r requirements.txt
 else

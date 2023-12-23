@@ -26,12 +26,18 @@ const emit = defineEmits(['open']);
 const addr = ref('');
 const visible = ref(false);
 const invalid_addr = ref(false);
-
-const re = /https:\/\/(?:www\.youtube\.com\/watch\?v=|youtu\.be\/)[A-Za-z0-9]+/;
+const hostnames = [
+    'youtube.com',
+    'youtu.be',
+    'www.youtube.com',
+    'www.youtu.be',
+    'm.youtube.com',
+]
 
 async function open_address() {
     invalid_addr.value = false;
-    if (!re.test(addr.value)) {
+    let url = new URL(addr.value);
+    if (!hostnames.includes(url.hostname)) {
         invalid_addr.value = true;
         return;
     }

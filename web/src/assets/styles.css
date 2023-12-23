@@ -135,3 +135,8 @@ body {
 .border-theme {
     border: 1px solid #FFA86A;
 }
+
+.qr-code {
+    width: 100% !important;
+    height: auto !important;
+}

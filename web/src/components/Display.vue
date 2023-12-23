@@ -21,17 +21,24 @@
                     </div>
                 </div>
             </div>
-            <div class="controls mt-3">
-                <button type="button" class="btn-controls" @click="seekBack">
-                    <span class="bi bi-skip-backward-circle-fill"></span>
-                </button>
-                <button type="button" class="btn-controls" @click="playPause">
-                    <span class="bi"
-                        :class="{ 'bi-play-circle-fill': store.paused, 'bi-pause-circle-fill': !store.paused }"></span>
-                </button>
-                <button type="button" class="btn-controls" @click="seekForward">
-                    <span class="bi bi-skip-forward-circle-fill"></span>
-                </button>
+            <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn-controls ms-0" @click="seekBack">
+                        <span class="bi bi-skip-backward-circle-fill"></span>
+                    </button>
+                    <button type="button" class="btn-controls" @click="playPause">
+                        <span class="bi"
+                            :class="{ 'bi-play-circle-fill': store.paused, 'bi-pause-circle-fill': !store.paused }"></span>
+                    </button>
+                    <button type="button" class="btn-controls" @click="seekForward">
+                        <span class="bi bi-skip-forward-circle-fill"></span>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="btn-controls me-0" @click="fullscreen">
+                        <span class="bi bi-fullscreen"></span>
+                    </button>
+                </div>
             </div>
             <div class="d-flex flex-column mt-3">
                 <h2>Applications</h2>
@@ -88,6 +95,10 @@ async function seekBack() {
 
 async function seekForward() {
     websocket.value.socket.emit('seekForward');
+}
+
+async function fullscreen() {
+    websocket.value.socket.emit('fullscreen');
 }
 
 function formatDuration(duration) {

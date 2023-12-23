@@ -8,8 +8,8 @@ from libraries.browser import Browser
 
 app = Flask(__name__, static_url_path='', static_folder='dist',)
 CORS(app)
-app.browser = Browser()
 app.socketio = SocketIO(app, cors_allowed_origins="*")
+app.browser = Browser()
 
 ## socketio
 @app.socketio.on("message")
@@ -50,6 +50,10 @@ def handle_seek_backward(data=None):
 def handle_seek_forward(data=None):
     app.browser.seek_forward()
 
+@app.socketio.on("fullscreen")
+def handle_fullscreen(data=None):
+    app.browser.fullscreen()
+
 # routes
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
@@ -79,6 +83,3 @@ def handle_timeupdate_event():
         "title": request.args["title"],
     })
     return Response(status=200)
-
-# main
-print("Server started.")
