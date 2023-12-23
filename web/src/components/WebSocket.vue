@@ -12,10 +12,9 @@ defineExpose({
 })
 
 onMounted(() => {
-    socket.value = io("http://192.168.1.2:8000");
+    socket.value = io(document.location.origin);
 
     socket.value.on('connect', () => {
-        console.log('websocket connected');
         store.connected = true;
         socket.value.emit('title');
     });

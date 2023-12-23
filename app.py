@@ -1,7 +1,8 @@
 #!/env/bin/python
 # -*- coding: utf-8 -*-
 
-from flask import Flask, request, Response, send_from_directory
+import socket
+from flask import Flask, request, Response, send_from_directory, render_template
 from flask_socketio import SocketIO, emit, disconnect
 from flask_cors import CORS
 from libraries.browser import Browser
@@ -60,9 +61,13 @@ def handle_fullscreen(data=None):
 def serve_vue(path):
     return send_from_directory(app.static_folder, "index.html")
 
+# @app.route("/connect")
+# def handle_route_connect():
+#     return send_from_directory(app.static_folder, "index.html")
+
 @app.route("/connect")
 def handle_route_connect():
-    return send_from_directory(app.static_folder, "index.html")
+    return render_template("qr.html", ip_addr=socket.gethostbyname(socket.gethostname()))
 
 @app.route("/api/play", methods=["GET"])
 def handle_play_event():
