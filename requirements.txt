@@ -1,0 +1,7 @@
+Flask
+flask-cors
+selenium
+flask-socketio
+gunicorn
+gevent
+gevent-websocket
