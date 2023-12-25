@@ -1,6 +1,8 @@
 #!/env/bin/python
 # -*- coding: utf-8 -*-
 
+import os
+import signal
 import socket
 from flask import Flask, request, Response, send_from_directory, render_template
 from flask_socketio import SocketIO, emit, disconnect
@@ -86,7 +88,7 @@ def handle_right(data=None):
 @app.socketio.on("exit")
 def handle_exit(data=None):
     app.browser.close()
-    exit()
+    os.kill(os.getpid(), signal.SIGINT)
 
 # routes
 @app.route("/", defaults={"path": ""})
