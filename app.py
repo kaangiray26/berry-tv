@@ -1,9 +1,8 @@
 #!/env/bin/python
 # -*- coding: utf-8 -*-
 
-import os
-import signal
 import socket
+import subprocess
 from flask import Flask, request, Response, send_from_directory, render_template
 from flask_socketio import SocketIO, emit, disconnect
 from flask_cors import CORS
@@ -88,7 +87,7 @@ def handle_right(data=None):
 @app.socketio.on("exit")
 def handle_exit(data=None):
     app.browser.close()
-    os.kill(os.getpid(), signal.SIGINT)
+    subprocess.call(["pkill", "gunicorn"])
 
 # routes
 @app.route("/", defaults={"path": ""})
