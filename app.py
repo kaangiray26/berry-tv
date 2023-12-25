@@ -61,7 +61,27 @@ def handle_previous(data=None):
     
 @app.socketio.on("next")
 def handle_next(data=None):
-    app.browser.next() 
+    app.browser.next()
+    
+@app.socketio.on("up")
+def handle_up(data=None):
+    app.browser.up()
+    
+@app.socketio.on("down")
+def handle_down(data=None):
+    app.browser.down()
+    
+@app.socketio.on("left")
+def handle_left(data=None):
+    app.browser.left()
+    
+@app.socketio.on("middle")
+def handle_middle(data=None):
+    app.browser.middle()
+    
+@app.socketio.on("right")
+def handle_right(data=None):
+    app.browser.right()
     
 @app.socketio.on("exit")
 def handle_exit(data=None):

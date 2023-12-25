@@ -3,7 +3,7 @@
         <div class="view">
             <Settings ref="settings" @exit="exit"></Settings>
             <YouTube ref="youtube" @open="openWebsite"></YouTube>
-            <div class="d-flex align-items-center mb-4">
+            <div class="d-flex align-items-center mb-3">
                 <h1 class="mb-0">Berry-TV</h1>
                 <h2 class="bi bi-gear-wide-connected ms-auto mb-0" @click="open_settings"></h2>
             </div>
@@ -36,30 +36,30 @@
                     </button>
                 </div>
             </div>
-            <div class="d-flex flex-column mt-3">
+            <div class="d-flex flex-column">
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn-controls">
+                    <button type="button" class="btn-controls" @click="up">
                         <span class="bi bi-caret-up-square-fill"></span>
                     </button>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn-controls">
+                    <button type="button" class="btn-controls" @click="left">
                         <span class="bi bi-caret-left-square-fill"></span>
                     </button>
-                    <button type="button" class="btn-controls">
+                    <button type="button" class="btn-controls" @click="middle">
                         <span class="bi bi-square-fill"></span>
                     </button>
-                    <button type="button" class="btn-controls">
+                    <button type="button" class="btn-controls" @click="right">
                         <span class="bi bi-caret-right-square-fill"></span>
                     </button>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn-controls">
+                    <button type="button" class="btn-controls" @click="down">
                         <span class="bi bi-caret-down-square-fill"></span>
                     </button>
                 </div>
             </div>
-            <div class="d-flex justify-content-center align-items-center mt-3">
+            <div class="d-flex justify-content-center align-items-center">
                 <button type="button" class="btn-controls" @click="previous">
                     <span class="bi bi-skip-start-fill"></span>
                 </button>
@@ -70,7 +70,7 @@
                     <span class="bi bi-skip-end-fill"></span>
                 </button>
             </div>
-            <div class="d-flex flex-column mt-3">
+            <div class="d-flex flex-column">
                 <h2>Applications</h2>
                 <div class="row g-3 row-cols-3">
                     <div class="col">
@@ -144,6 +144,26 @@ async function next() {
 
 async function exit() {
     websocket.value.socket.emit('exit');
+}
+
+async function up() {
+    websocket.value.socket.emit('up');
+}
+
+async function left() {
+    websocket.value.socket.emit('left');
+}
+
+async function middle() {
+    websocket.value.socket.emit('middle');
+}
+
+async function right() {
+    websocket.value.socket.emit('right');
+}
+
+async function down() {
+    websocket.value.socket.emit('down');
 }
 
 async function open_settings() {

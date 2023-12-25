@@ -82,3 +82,57 @@ class Browser:
 
     def close(self):
         self.driver.quit()
+        
+    def select_item(self, index):
+        self.driver.execute_script(f"[...document.querySelector('ytd-compact-video-renderer')][{index}].style.backgroundColor = 'purple'")
+        self.driver.execute_script(f"[...document.querySelector('ytd-compact-video-renderer')][{index}].style.padding = '0.5rem'")
+        self.driver.execute_script(f"[...document.querySelector('ytd-compact-video-renderer')][{index}]"+".scrollIntoView({ behavior: 'smooth', block: 'center'})")
+        
+    def deselect_all(self):
+        self.driver.execute_script("[...document.querySelector('ytd-compact-video-renderer')].map(item => item.style.backgroundColor = '')")
+        self.driver.execute_script("[...document.querySelector('ytd-compact-video-renderer')].map(item => item.style.padding = '')")
+        
+    def right(self):
+        if self.selected:
+            return
+        self.selected = True
+        self.driver.execute_script("document.querySelector('ytd-compact-video-renderer').style.backgroundColor = 'purple'")
+        self.driver.execute_script("document.querySelector('ytd-compact-video-renderer').style.padding = '0.5rem'")
+        
+    def left(self):
+        self.selected = False
+        self.driver.execute_script("[...document.querySelector('ytd-compact-video-renderer')].map(item => item.style.backgroundColor = '')")
+        self.driver.execute_script("[...document.querySelector('ytd-compact-video-renderer')].map(item => item.style.padding = '')")
+        
+    def up(self):
+        # Return
+        if not self.selected:
+            return
+        if self.item_index == 0:
+            return
+        
+        # Deselect all
+        self.deselect_all()
+        
+        # Change to previous item
+        self.item_index -= 1
+        self.select_item(self.item_index)
+        
+    def down(self):
+        # Return
+        if not self.selected:
+            return
+        
+        # Deselect all
+        self.deselect_all()
+        
+        # Change to next item
+        self.item_index += 1
+        self.select_item(self.item_index)
+        
+    def middle(self):
+        if not self.selected:
+            return
+        self.item_index = 0
+        self.selected = False
+        self.driver.execute_script(f"[...document.querySelector('ytd-compact-video-renderer')][{self.item_index}].querySelector('img').click()")
