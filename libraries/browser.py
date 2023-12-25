@@ -84,25 +84,24 @@ class Browser:
         self.driver.quit()
         
     def select_item(self, index):
-        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer')][{index}].style.backgroundColor = 'purple'")
-        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer')][{index}].style.padding = '0.5rem'")
-        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer')][{index}]"+".scrollIntoView({ behavior: 'smooth', block: 'center'})")
+        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')][{index}].style.backgroundColor = 'purple'")
+        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')][{index}].style.padding = '0.5rem'")
+        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')][{index}]"+".scrollIntoView({ behavior: 'smooth', block: 'center'})")
         
     def deselect_all(self):
-        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer')].map(item => item.style.backgroundColor = '')")
-        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer')].map(item => item.style.padding = '')")
+        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')].map(item => item.style.backgroundColor = '')")
+        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')].map(item => item.style.padding = '')")
         
     def right(self):
         if self.selected:
             return
-        self.selected = True
-        self.driver.execute_script("document.querySelector('ytd-compact-video-renderer').style.backgroundColor = 'purple'")
-        self.driver.execute_script("document.querySelector('ytd-compact-video-renderer').style.padding = '0.5rem'")
+        self.select_item(self.item_index)
         
     def left(self):
+        self.item_index = 0
         self.selected = False
-        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer')].map(item => item.style.backgroundColor = '')")
-        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer')].map(item => item.style.padding = '')")
+        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')].map(item => item.style.backgroundColor = '')")
+        self.driver.execute_script("[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')].map(item => item.style.padding = '')")
         
     def up(self):
         # Return
@@ -135,4 +134,4 @@ class Browser:
             return
         self.item_index = 0
         self.selected = False
-        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer')][{self.item_index}].querySelector('img').click()")
+        self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer, yd-compact-radio-renderer, ytd-compact-playlist-renderer')][{self.item_index}].querySelector('img').click()")
