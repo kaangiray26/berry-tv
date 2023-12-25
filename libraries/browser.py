@@ -95,6 +95,7 @@ class Browser:
     def right(self):
         if self.selected:
             return
+        self.selected = True
         self.select_item(self.item_index)
         
     def left(self):
