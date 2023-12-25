@@ -87,7 +87,9 @@ def handle_right(data=None):
 @app.socketio.on("exit")
 def handle_exit(data=None):
     app.browser.close()
-    subprocess.call(["pkill", "gunicorn"])
+    
+    # Kill python and gunicorn processes
+    subprocess.run(["pkill", "python", ";", "pkill", "gunicorn"])
 
 # routes
 @app.route("/", defaults={"path": ""})
