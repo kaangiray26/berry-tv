@@ -22,9 +22,9 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-between mt-3">
+            <div class="d-flex justify-content-center mt-3">
                 <div class="d-flex align-items-center">
-                    <button type="button" class="btn-controls ms-0" @click="seekBack">
+                    <button type="button" class="btn-controls" @click="seekBack">
                         <span class="bi bi-skip-backward-circle-fill"></span>
                     </button>
                     <button type="button" class="btn-controls" @click="playPause">
@@ -35,11 +35,40 @@
                         <span class="bi bi-skip-forward-circle-fill"></span>
                     </button>
                 </div>
-                <div>
-                    <button type="button" class="btn-controls me-0" @click="fullscreen">
-                        <span class="bi bi-fullscreen"></span>
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn-controls">
+                        <span class="bi bi-caret-up-square-fill"></span>
                     </button>
                 </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn-controls">
+                        <span class="bi bi-caret-left-square-fill"></span>
+                    </button>
+                    <button type="button" class="btn-controls">
+                        <span class="bi bi-square-fill"></span>
+                    </button>
+                    <button type="button" class="btn-controls">
+                        <span class="bi bi-caret-right-square-fill"></span>
+                    </button>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn-controls">
+                        <span class="bi bi-caret-down-square-fill"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-3">
+                <button type="button" class="btn-controls" @click="previous">
+                    <span class="bi bi-skip-start-fill"></span>
+                </button>
+                <button type="button" class="btn-controls" @click="fullscreen">
+                    <span class="bi bi-fullscreen"></span>
+                </button>
+                <button type="button" class="btn-controls" @click="next">
+                    <span class="bi bi-skip-end-fill"></span>
+                </button>
             </div>
             <div class="d-flex flex-column mt-3">
                 <h2>Applications</h2>
@@ -103,6 +132,14 @@ async function seekForward() {
 
 async function fullscreen() {
     websocket.value.socket.emit('fullscreen');
+}
+
+async function previous() {
+    websocket.value.socket.emit('previous');
+}
+
+async function next() {
+    websocket.value.socket.emit('next');
 }
 
 async function exit() {

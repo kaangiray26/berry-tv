@@ -1,8 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 class Browser:
     def __init__(self):
+        self.item_index = 0
+        self.selected = False
         print("Starting Firefox session...")
         
         # Set up Firefox options
@@ -33,7 +36,13 @@ class Browser:
         }
     
     def open_address(self, address):
+        # Reset selected items
+        self.item_index = 0
+        self.selected = False
+        
+        # Open address
         self.driver.get(address)
+        
         # Set up event listeners for play and pause events
         self.driver.execute_script("document.querySelector('video').onplaying = () => {fetch('http://localhost:8000/api/play')}")
         self.driver.execute_script("document.querySelector('video').onplay = () => {fetch('http://localhost:8000/api/play')}")
@@ -62,6 +71,14 @@ class Browser:
         
     def fullscreen(self):
         self.driver.find_element(By.TAG_NAME, "body").send_keys("f")
+        
+    def previous(self):
+        # Go back in history
+        self.driver.execute_script("window.history.back()")
+        
+    def next(self):
+        # Press shift + n to go to next video
+        self.driver.find_element(By.TAG_NAME, "body").send_keys(Keys.SHIFT, "n")
 
     def close(self):
         self.driver.quit()

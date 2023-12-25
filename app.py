@@ -55,6 +55,14 @@ def handle_seek_forward(data=None):
 def handle_fullscreen(data=None):
     app.browser.fullscreen()
     
+@app.socketio.on("previous")
+def handle_previous(data=None):
+    app.browser.previous()
+    
+@app.socketio.on("next")
+def handle_next(data=None):
+    app.browser.next() 
+    
 @app.socketio.on("exit")
 def handle_exit(data=None):
     app.browser.close()
