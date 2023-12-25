@@ -1,5 +1,5 @@
 <template>
-    <div v-if="visible" class="youtube-modal">
+    <div v-if="visible" class="theme-modal">
         <div class="d-flex justify-content-between">
             <h1>YouTube</h1>
             <span class="dialog-close material-symbols-outlined" @click="hide">

@@ -19,7 +19,7 @@ class Browser:
         self.driver.fullscreen_window()
         
         # Install uBlock Origin
-        self.driver.install_addon("libraries/uBlock0_1.54.0.firefox.signed.xpi")
+        self.driver.install_addon("/home/buzluk/berry-tv/libraries/uBlock0_1.54.0.firefox.signed.xpi")
         self.driver.execute_script("window.location.href = 'http://localhost:8000/connect'")
     
     def get_title(self):
@@ -62,3 +62,6 @@ class Browser:
         
     def fullscreen(self):
         self.driver.find_element(By.TAG_NAME, "body").send_keys("f")
+
+    def close(self):
+        self.driver.quit()

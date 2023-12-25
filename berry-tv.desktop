@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Berry-TV
+Exec=env/bin/python -m gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 --bind 0.0.0.0:8000 app:app
+Path=/home/buzluk/berry-tv/

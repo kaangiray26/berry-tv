@@ -54,16 +54,17 @@ def handle_seek_forward(data=None):
 @app.socketio.on("fullscreen")
 def handle_fullscreen(data=None):
     app.browser.fullscreen()
+    
+@app.socketio.on("exit")
+def handle_exit(data=None):
+    app.browser.close()
+    exit()
 
 # routes
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_vue(path):
     return send_from_directory(app.static_folder, "index.html")
-
-# @app.route("/connect")
-# def handle_route_connect():
-#     return send_from_directory(app.static_folder, "index.html")
 
 @app.route("/connect")
 def handle_route_connect():

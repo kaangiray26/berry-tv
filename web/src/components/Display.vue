@@ -1,10 +1,11 @@
 <template>
     <div class="d-flex justify-content-center">
         <div class="view">
+            <Settings ref="settings" @exit="exit"></Settings>
             <YouTube ref="youtube" @open="openWebsite"></YouTube>
             <div class="d-flex align-items-center mb-4">
                 <h1 class="mb-0">Berry-TV</h1>
-                <h1 class="bi ms-auto mb-0" :class="{ 'bi-wifi-off': !store.connected, 'bi-wifi': store.connected }"></h1>
+                <h2 class="bi bi-gear-wide-connected ms-auto mb-0" @click="open_settings"></h2>
             </div>
             <div class="status-card">
                 <span class="status-card-title">Now Playing</span>
@@ -59,9 +60,12 @@
 import { ref } from 'vue';
 import WebSocket from './WebSocket.vue';
 import YouTube from './YouTube.vue';
+import Settings from './Settings.vue';
 import { store } from '/js/store.js';
 
+const settings = ref(null);
 const youtube = ref(null);
+
 const websocket = ref(null);
 const progressbar = ref(null);
 
@@ -99,6 +103,14 @@ async function seekForward() {
 
 async function fullscreen() {
     websocket.value.socket.emit('fullscreen');
+}
+
+async function exit() {
+    websocket.value.socket.emit('exit');
+}
+
+async function open_settings() {
+    settings.value.show();
 }
 
 function formatDuration(duration) {

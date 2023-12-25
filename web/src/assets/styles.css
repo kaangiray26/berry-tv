@@ -96,7 +96,7 @@ body {
     border-radius: 0.375rem;
 }
 
-.youtube-modal {
+.theme-modal {
     z-index: 1;
     position: absolute;
     top: 50%;
@@ -139,4 +139,25 @@ body {
 .qr-code {
     width: 100% !important;
     height: auto !important;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.theme-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.theme-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: #222129;
+    background-color: #FFA86A;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
 }
