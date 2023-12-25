@@ -135,4 +135,5 @@ class Browser:
             return
         self.item_index = 0
         self.selected = False
+        self.deselect_all()
         self.driver.execute_script(f"[...document.querySelectorAll('ytd-compact-video-renderer, ytd-compact-radio-renderer, ytd-compact-playlist-renderer')][{self.item_index}].querySelector('img').click()")
