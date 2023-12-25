@@ -89,7 +89,7 @@ def handle_exit(data=None):
     app.browser.close()
     
     # Kill python and gunicorn processes
-    command= "pkill python ; pkill gunicorn"
+    command= "pkill -9 python ; pkill -9 gunicorn"
     subprocess.Popen(command, shell=True)
 
 # routes
